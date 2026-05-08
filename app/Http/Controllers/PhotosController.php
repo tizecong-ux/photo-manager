@@ -9,6 +9,8 @@ use Illuminate\View\View;
 
 class PhotosController extends Controller
 {
+    function __construct(protected PhotoService $service) {}
+
     /**
      * 写真一覧画面
      *
@@ -16,7 +18,10 @@ class PhotosController extends Controller
      */
     public function index(): View
     {
-        return view('photos.index');
+        $userId = auth()->user();
+        $photos = $this->service->getByUserDesc($userId);
+
+        return view('photos.index', compact('photos'));
     }
 
 
