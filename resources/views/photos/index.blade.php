@@ -15,10 +15,19 @@
                         </div>
                     @endif
 
-                    <a href="{{ route('photos.create') }}"
-                        class="inline-flex items-center px-4 py-2 bg-indigo-600 border border-transparent rounded-md font-semibold text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
-                        写真アップロード画面
-                    </a>
+                    <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                        <a href="{{ route('photos.create') }}"
+                            class="inline-flex items-center px-4 py-2 bg-indigo-600 border border-transparent rounded-md font-semibold text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+                            写真アップロード画面
+                        </a>
+
+                        @if (!$isAuthenticated)
+                            <a href="{{ route('oauth.authorize') }}"
+                                class="inline-flex items-center px-4 py-2 bg-green-600 border border-transparent rounded-md font-semibold text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2">
+                                OAuth認可ページへ
+                            </a>
+                        @endif
+                    </div>
                 </div>
             </div>
 

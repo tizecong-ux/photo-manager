@@ -21,7 +21,11 @@ class PhotosController extends Controller
         $userId = auth()->user();
         $photos = $this->service->getByUserDesc($userId);
 
-        return view('photos.index', compact('photos'));
+        // 認証済み判定
+        $sessionKey = config('oauth_session.access_token_key');
+        $isAuthenticated = session()->has($sessionKey);
+
+        return view('photos.index', compact('photos', 'isAuthenticated'));
     }
 
 
