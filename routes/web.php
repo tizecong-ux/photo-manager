@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\OAuthController;
 use App\Http\Controllers\PhotosController;
+use App\Http\Controllers\TweetsController;
 use Illuminate\Support\Facades\Route;
 
 // TOPページにアクセスした際に、ログインページへリダイレクトするルート
@@ -26,6 +27,14 @@ Route::middleware('auth')->group(function () {
         Route::get('/authorize', [OAuthController::class, 'authorize'])->name('authorize');
         // OAuthコールバック
         Route::get('/callback', [OAuthController::class, 'callback'])->name('callback');
+    });
+
+    // Tweet関連
+    Route::prefix('tweets')->name('tweets.')->group(function () {
+        // Tweet一覧画面
+        Route::get('/', [TweetsController::class, 'index'])->name('index');
+        // Tweet作成処理
+        Route::post('/', [TweetsController::class, 'store'])->name('store');
     });
 });
 

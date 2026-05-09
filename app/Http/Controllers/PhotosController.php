@@ -18,7 +18,7 @@ class PhotosController extends Controller
      */
     public function index(): View
     {
-        $userId = auth()->user();
+        $userId = auth()->user()->id;
         $photos = $this->service->getByUserDesc($userId);
 
         // 認証済み判定
@@ -49,11 +49,12 @@ class PhotosController extends Controller
     public function store(PhotoStoreRequest $request, PhotoService $service): RedirectResponse
     {
         try {
-            $service->create($request->validated(), $request->file('image'));
+            $userId = auth()->user()->id;
+            $service->create($request->validated(), $request->file('image'), $userId);
 
             return redirect()
                 ->route('photos.index')
-                ->with('success', '写真のアップロードが終了しました。');
+                ->with('success', '写真のアップロードが完了しました。');
         } catch (\Exception $e) {
             report($e);
 

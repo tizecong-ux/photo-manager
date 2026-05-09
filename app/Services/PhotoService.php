@@ -16,12 +16,13 @@ class PhotoService
     /**
      * 写真一覧を取得する
      *
-     * @param User $user
+     * @param int $userId
+     * @param bool $isTweeted
      * @return Collection
      */
-    public function getByUserDesc(User $user): Collection
+    public function getByUserDesc(int $userId, bool $isTweeted = false): Collection
     {
-        return $this->repository->getByUserDesc($user->id);
+        return $this->repository->getByUserDesc($userId, $isTweeted);
     }
 
     /**
@@ -29,16 +30,17 @@ class PhotoService
      *
      * @param array $data
      * @param UploadedFile $image
-     * @param User $user
+     * @param int $userId
      * @return Photo
      */
-    public function create(array $data, UploadedFile $image): Photo
+    public function create(array $data, UploadedFile $image, int $userId): Photo
     {
         $path = Storage::disk('public')->putFile('photos', $image);
 
         return $this->repository->create([
             'title' => $data['title'],
             'image_path' => $path,
+            'user_id' => $userId,
         ]);
     }
 }
