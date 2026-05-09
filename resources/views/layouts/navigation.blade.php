@@ -32,8 +32,9 @@
                 @auth
                     @if (!session(config('oauth_session.access_token_key')))
                         <a href="{{ route('oauth.authorize') }}" @class([
-                            'inline-flex items-center px-4 py-2 border border-transparent rounded-md font-semibold text-white focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2',
-                            'bg-green-600 hover:bg-green-700' => !request()->routeIs('oauth.authorize'),
+                            'inline-flex items-center px-4 py-2 border border-transparent rounded-md font-semibold text-white focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2',
+                            'bg-orange-600 hover:bg-orange-700' => !request()->routeIs(
+                                'oauth.authorize'),
                             'bg-gray-400 cursor-not-allowed pointer-events-none' => request()->routeIs(
                                 'oauth.authorize'),
                         ])>

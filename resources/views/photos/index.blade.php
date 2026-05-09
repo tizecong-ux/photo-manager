@@ -11,7 +11,7 @@
                         </div>
                         <div class="aspect-[4/3] overflow-hidden bg-gray-100">
                             <img src="{{ Storage::url($photo->image_path) }}" alt="{{ $photo->title }}"
-                                class="h-full w-full object-cover transition duration-200 hover:scale-105" />
+                                class="h-full w-full object-cover transition duration-200" />
                         </div>
                         @if ($isAuthenticated && !$photo->tweet)
                             <div class="px-4 py-4">
